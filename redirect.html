@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirect Page</title>
+  <style>
+    /* 加载动画样式 */
+    .loader {
+        display: block;
+        margin: 150px auto;
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+  </style>
+  <script>
+    // 获取 URL 中的 path 参数
+    function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // 拼接跳转路径并触发跳转
+    function redirectToPath() {
+        const path = getQueryParam('path');
+        if (path) {
+            const redirectUrl = `https://m-dl.immotors.com/?type=h5&path=${encodeURIComponent(path)}`;
+            const linkElement = document.createElement("a");
+            linkElement.href = redirectUrl;
+            linkElement.click();
+        } else {
+            console.error('Path parameter is missing.');
+        }
+    }
+
+    // 页面加载完成后执行跳转逻辑
+    window.onload = redirectToPath;
+</script>
+</head>
+<body>
+  <!-- 加载动画 -->
+  <div class="loader"></div>
+</body>
+</html>
