@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京三日游 - 构成主义风格旅行规划</title>
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #E63946;
+            --primary-black: #1D1D1D;
+            --accent-gray: #457B9D;
+            --bg-light: #F1FAEE;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--primary-black);
+        }
+        
+        .title-font {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .constructivist-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .constructivist-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--primary-red);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+        
+        .diagonal-line {
+            position: relative;
+        }
+        
+        .diagonal-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20px;
+            width: 2px;
+            height: 100%;
+            background: var(--primary-red);
+            transform: rotate(15deg);
+        }
+        
+        .schedule-card {
+            position: relative;
+            border: 2px solid var(--primary-black);
+            transition: transform 0.3s ease;
+        }
+        
+        .schedule-card:hover {
+            transform: translateX(10px);
+        }
+        
+        .schedule-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: -10px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary-red);
+            z-index: -1;
+        }
+        
+        .geometric-bg {
+            position: relative;
+        }
+        
+        .geometric-bg::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--accent-gray);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 1rem;
+            height: 2px;
+            background: var(--primary-red);
+        }
+
+        @media (max-width: 640px) {
+            .constructivist-container::before {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        .location-link {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .location-link:hover {
+            color: var(--primary-red);
+        }
+        
+        .location-link i {
+            font-size: 0.8em;
+            margin-left: 0.5em;
+        }
+    </style>
+    <script>
+        function openAmap(name, address) {
+            // 检测设备类型
+            var isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
+            var isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+            
+            // 构建URL scheme
+            var url;
+            if (isiOS) {
+                // iOS URL Scheme
+                url = `iosamap://poi?sourceApplication=网页&name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&dev=0`;
+            } else if (isAndroid) {
+                // Android URL Scheme
+                url = `androidamap://poi?sourceApplication=网页&name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&dev=0`;
+            } else {
+                // 网页版高德地图
+                url = `https://uri.amap.com/marker?name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&coordinate=gaode`;
+            }
+            
+            // 尝试打开APP
+            window.location.href = url;
+            
+            // 如果无法打开APP，2秒后跳转到网页版
+            setTimeout(function() {
+                window.location.href = `https://uri.amap.com/marker?name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&coordinate=gaode`;
+            }, 2000);
+        }
+    </script>
+</head>
+<body class="min-h-screen">
+    <div class="constructivist-container max-w-4xl mx-auto px-4 py-8">
+        <!-- 标题区域 -->
+        <header class="mb-12">
+            <h1 class="title-font text-5xl font-bold mb-4 transform -rotate-2 text-red-600">
+                北京三日游
+            </h1>
+            <div class="flex flex-wrap gap-4 items-center">
+                <div class="bg-black text-white px-4 py-2 transform rotate-2">
+                    <i class="fas fa-calendar-alt mr-2"></i>2025年4月30日
+                </div>
+                <div class="bg-red-600 text-white px-4 py-2 transform -rotate-1">
+                    <i class="fas fa-user-friends mr-2"></i>家庭出游
+                </div>
+                <div class="bg-gray-800 text-white px-4 py-2">
+                    <i class="fas fa-cloud mr-2"></i>春季宜人
+                </div>
+            </div>
+        </header>
+
+        <!-- 行程概览 -->
+        <section class="mb-16">
+            <h2 class="title-font text-3xl font-bold mb-6 transform -rotate-1">
+                <span class="bg-black text-white px-4 py-2">行程概览</span>
+            </h2>
+            <div class="grid gap-6 md:grid-cols-3">
+                <div class="schedule-card bg-white p-6">
+                    <h3 class="text-xl font-bold mb-3">第一天</h3>
+                    <ul class="space-y-2">
+                        <li class="timeline-item location-link" onclick="openAmap('天安门广场', '北京市东城区长安街')">
+                            天安门广场<i class="fas fa-location-dot"></i>
+                        </li>
+                        <li class="timeline-item location-link" onclick="openAmap('军事博物馆', '北京市海淀区复兴路9号')">
+                            军事博物馆<i class="fas fa-location-dot"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="schedule-card bg-white p-6">
+                    <h3 class="text-xl font-bold mb-3">第二天</h3>
+                    <ul class="space-y-2">
+                        <li class="timeline-item location-link" onclick="openAmap('北京科技馆', '北京市朝阳区北辰东路5号')">
+                            科技馆<i class="fas fa-location-dot"></i>
+                        </li>
+                        <li class="timeline-item location-link" onclick="openAmap('牛街', '北京市西城区牛街')">
+                            牛街风情<i class="fas fa-location-dot"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="schedule-card bg-white p-6">
+                    <h3 class="text-xl font-bold mb-3">第三天</h3>
+                    <ul class="space-y-2">
+                        <li class="timeline-item location-link" onclick="openAmap('北京环球度假区', '北京市通州区环球度假区路1号')">
+                            环球影城<i class="fas fa-location-dot"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 详细时间表 -->
+        <section class="mb-16">
+            <h2 class="title-font text-3xl font-bold mb-6 transform rotate-1">
+                <span class="bg-red-600 text-white px-4 py-2">详细时间表</span>
+            </h2>
+            <div class="space-y-8">
+                <!-- 第一天 -->
+                <div class="bg-white p-6 diagonal-line">
+                    <h3 class="text-2xl font-bold mb-4">第一天</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="text-red-600 font-bold whitespace-nowrap">09:00-11:30</div>
+                            <div>
+                                <h4 class="font-bold location-link" onclick="openAmap('天安门广场', '北京市东城区长安街')">
+                                    天安门广场<i class="fas fa-location-dot"></i>
+                                </h4>
+                                <p class="text-gray-600">参观天安门城楼、人民英雄纪念碑</p>
+                                <p class="text-sm text-gray-500">提示：需携带身份证，提前安检</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-red-600 font-bold whitespace-nowrap">13:00-16:30</div>
+                            <div>
+                                <h4 class="font-bold location-link" onclick="openAmap('军事博物馆', '北京市海淀区复兴路9号')">
+                                    军事博物馆<i class="fas fa-location-dot"></i>
+                                </h4>
+                                <p class="text-gray-600">参观武器装备馆和近代馆</p>
+                                <p class="text-sm text-gray-500">提示：需要提前预约</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第二天 -->
+                <div class="bg-white p-6 diagonal-line">
+                    <h3 class="text-2xl font-bold mb-4">第二天</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="text-red-600 font-bold whitespace-nowrap">09:30-12:30</div>
+                            <div>
+                                <h4 class="font-bold location-link" onclick="openAmap('北京科技馆', '北京市朝阳区北辰东路5号')">
+                                    科技馆<i class="fas fa-location-dot"></i>
+                                </h4>
+                                <p class="text-gray-600">参观航天航空馆和生命科学馆</p>
+                                <p class="text-sm text-gray-500">提示：建议提前购票</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-red-600 font-bold whitespace-nowrap">14:00-17:00</div>
+                            <div>
+                                <h4 class="font-bold location-link" onclick="openAmap('牛街', '北京市西城区牛街')">
+                                    牛街<i class="fas fa-location-dot"></i>
+                                </h4>
+                                <p class="text-gray-600">参观清真寺，品尝特色美食</p>
+                                <p class="text-sm text-gray-500">推荐：牛街清真饭庄</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第三天 -->
+                <div class="bg-white p-6 diagonal-line">
+                    <h3 class="text-2xl font-bold mb-4">第三天</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="text-red-600 font-bold whitespace-nowrap">09:00-20:00</div>
+                            <div>
+                                <h4 class="font-bold location-link" onclick="openAmap('北京环球度假区', '北京市通州区环球度假区路1号')">
+                                    环球影城<i class="fas fa-location-dot"></i>
+                                </h4>
+                                <p class="text-gray-600">全天游玩，体验主题项目</p>
+                                <p class="text-sm text-gray-500">提示：建议下载官方APP查看排队情况</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 交通信息 -->
+        <section class="mb-16">
+            <h2 class="title-font text-3xl font-bold mb-6">
+                <span class="bg-black text-white px-4 py-2 transform rotate-1">交通信息</span>
+            </h2>
+            <div class="bg-white p-6">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <i class="fas fa-subway text-red-600 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold">天安门 → 军事博物馆</h4>
+                            <p class="text-gray-600">地铁1号线，约25分钟</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i class="fas fa-subway text-red-600 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold">科技馆 → 牛街</h4>
+                            <p class="text-gray-600">地铁4号线转7号线，约30分钟</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i class="fas fa-subway text-red-600 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold">市区 → 环球影城</h4>
+                            <p class="text-gray-600">地铁1号线或7号线，约75分钟</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实用信息 -->
+        <section class="mb-8">
+            <h2 class="title-font text-3xl font-bold mb-6 transform -rotate-1">
+                <span class="bg-red-600 text-white px-4 py-2">实用信息</span>
+            </h2>
+            <div class="grid gap-6 md:grid-cols-2">
+                <div class="bg-white p-6">
+                    <h3 class="font-bold mb-4">必备物品</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-id-card mr-2 text-red-600"></i>身份证</li>
+                        <li><i class="fas fa-mobile-alt mr-2 text-red-600"></i>手机（下载相关APP）</li>
+                        <li><i class="fas fa-umbrella mr-2 text-red-600"></i>遮阳伞</li>
+                        <li><i class="fas fa-wallet mr-2 text-red-600"></i>现金和移动支付</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6">
+                    <h3 class="font-bold mb-4">紧急联系</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-phone mr-2 text-red-600"></i>急救：120</li>
+                        <li><i class="fas fa-phone mr-2 text-red-600"></i>报警：110</li>
+                        <li><i class="fas fa-phone mr-2 text-red-600"></i>旅游咨询：12301</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 
