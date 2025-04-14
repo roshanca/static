@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>北京三日游 - 肉山的旅行规划</title>
+    <title>北京三日游 - 复古风格旅行规划</title>
     <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -172,9 +172,9 @@
             
             var url;
             if (isiOS) {
-                url = `iosamap://path?sourceApplication=网页&name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&dev=0`;
+                url = `iosamap://poi?sourceApplication=网页&name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&dev=0`;
             } else if (isAndroid) {
-                url = `androidamap://navi?sourceApplication=网页&name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&dev=0`;
+                url = `androidamap://poi?sourceApplication=网页&name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&dev=0`;
             } else {
                 url = `https://uri.amap.com/marker?name=${encodeURIComponent(name)}&address=${encodeURIComponent(address)}&coordinate=gaode`;
             }
